@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -741,6 +745,31 @@ body {
 }
     </style>
 </head>
+    <script>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCSpQ0cIH9Lm2xyw2I2vgNTYLhvvnNu0dY",
+  authDomain: "personal-finace-a2618.firebaseapp.com",
+  projectId: "personal-finace-a2618",
+  storageBucket: "personal-finace-a2618.firebasestorage.app",
+  messagingSenderId: "663488619398",
+  appId: "1:663488619398:web:b1a2fe65ade578934fc207"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+
+  console.log("Firebase initialized successfully!");
+</script>
 <body>
     <div class="app-container">
         <header class="app-header">
