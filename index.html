@@ -917,5 +917,73 @@ const app = initializeApp(firebaseConfig);
     </div>
 
     <script src="app.js"></script>
+    <!-- LOGIN SECTION -->
+<div id="authContainer" style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+  <h2>Đăng nhập</h2>
+  
+  <div style="margin-bottom: 10px;">
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="your@email.com" style="width: 100%; padding: 8px; box-sizing: border-box;">
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <label>Mật khẩu:</label>
+    <input type="password" id="password" placeholder="Nhập mật khẩu" style="width: 100%; padding: 8px; box-sizing: border-box;">
+  </div>
+  
+  <button id="loginBtn" style="width: 48%; padding: 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-right: 2%;">Đăng nhập</button>
+  <button id="signupBtn" style="width: 48%; padding: 10px; background-color: #2196F3; color: white; border: none; cursor: pointer;">Tạo tài khoản</button>
+  
+  <p id="authMessage" style="color: red; text-align: center; margin-top: 10px;"></p>
+</div>
+
+<!-- MAIN APP (ẩn ban đầu) -->
+<div id="appContainer" style="display: none;">
+  <!-- Form Bloggle Editor của bạn sẽ hiển thị ở đây -->
+</div>
+<script>
+  const email = document.getElementById('email');
+  const password = document.getElementById('password');
+  const loginBtn = document.getElementById('loginBtn');
+  const signupBtn = document.getElementById('signupBtn');
+  const authMessage = document.getElementById('authMessage');
+  const authContainer = document.getElementById('authContainer');
+  const appContainer = document.getElementById('appContainer');
+
+  // Đăng nhập
+  loginBtn.addEventListener('click', async () => {
+    try {
+      await auth.signInWithEmailAndPassword(email.value, password.value);
+      showApp();
+    } catch (error) {
+      authMessage.textContent = "❌ " + error.message;
+    }
+  });
+
+  // Tạo tài khoản
+  signupBtn.addEventListener('click', async () => {
+    try {
+      await auth.createUserWithEmailAndPassword(email.value, password.value);
+      showApp();
+    } catch (error) {
+      authMessage.textContent = "❌ " + error.message;
+    }
+  });
+
+  // Kiểm tra trạng thái đăng nhập
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      showApp();
+    } else {
+      authContainer.style.display = 'block';
+      appContainer.style.display = 'none';
+    }
+  });
+
+  function showApp() {
+    authContainer.style.display = 'none';
+    appContainer.style.display = 'block';
+  }
+</script>
 </body>
 </html>
